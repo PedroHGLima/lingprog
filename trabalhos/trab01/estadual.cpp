@@ -1,14 +1,12 @@
-#include <ctime>
-
 #include "estadual.h"
 
 Estadual::Estadual() {
-    srand(time(0));             // inicializa gerador de numeros aleatorios
     votos.resize(CANDIDATOS);   // inicializa vetor de candidatos
     for (unsigned int i=0; i<CANDIDATOS; i++)
         gerarDados(i);          // gera votos para cada candidato
 
     // gera sigla aleatoria para o estado
+    sigla.resize(3);
     sigla[0] = 65 + ( rand() % ( 90 - 65 + 1 ) );
     sigla[1] = 65 + ( rand() % ( 90 - 65 + 1 ) );
     sigla[2] = '\0';
@@ -31,19 +29,6 @@ double Estadual::mediaMovel(int numMeses, unsigned int candidato) {
 double Estadual::avaliarEstabilidade(unsigned int candidato) {
     double atual = mediaMovel(MESES, candidato);               // media movel do mes atual
     double anterior = mediaMovel(MESES - 1, candidato);        // media movel do mes anterior
-
-/*
-    if (varPercentual <= 98) {
-        // Variacao indica queda de 2% ou mais
-        std::cout << "Em queda" << std::endl;
-    } else if (varPercentual >= 102) {
-        // Variacao indica alta de 2% ou mais
-        std::cout << "Em alta" << std::endl;
-    } else {
-        // Variacao indica estabilidade
-        std::cout << "Estavel" << std::endl;
-    }
-*/
     return atual/anterior*100;
 }
 

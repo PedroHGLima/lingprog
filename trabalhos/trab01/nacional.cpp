@@ -12,7 +12,7 @@ void Nacional::gerarEstados(int nEstados) {
 }
 
 void Nacional::avaliarEstabilidade() {
-    std::vector<char[3]> altasA, altasB;
+    std::vector<std::string> altasA, altasB;
     for (size_t i = 0; i < estados.size(); i++) {
         if (estados[i].avaliarEstabilidade(0) > 102) {
             altasA.push_back(estados[i].getSigla());
@@ -27,11 +27,21 @@ void Nacional::avaliarEstabilidade() {
     for (size_t i = 0; i < altasA.size(); i++) {
         std::cout << altasA[i] << " ";
     }
+    std::cout << std::endl;
 
     // Imprime os estados que o candidato B esta em alta
-    std::cout << std::endl << "Estados em que o candidato B esta em alta:" << std::endl;
+    std::cout << "Estados em que o candidato B esta em alta:" << std::endl;
     for (size_t i = 0; i < altasB.size(); i++) {
         std::cout << altasB[i] << " ";
     }
+    std::cout << std::endl;
 
+}
+
+void Nacional::avaliarEstabilidadeNacional() {
+    // TODO
+}
+
+Estadual Nacional::getEstado(int i) {
+    return estados[i];
 }
