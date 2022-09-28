@@ -1,5 +1,4 @@
 #include "nacional.h"
-#include "estadual.h"
 
 Nacional::Nacional() {
     gerarEstados();

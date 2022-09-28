@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 
+#define MESES 7
+
 class Estadual {
     public:
         Estadual();

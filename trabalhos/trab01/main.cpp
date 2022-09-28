@@ -1,6 +1,5 @@
 #include <iostream>
 
-#include "estadual.h"
 #include "nacional.h"
 
 using namespace std;
