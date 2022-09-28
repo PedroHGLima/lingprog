@@ -1,9 +1,9 @@
+#include <ctime>
+
 #include "estadual.h"
 
-#define MESES 7
-
-
 Estadual::Estadual() {
+    srand(time(0));
     gerarDados();
     sigla[0] = 65 + ( rand() % ( 90 - 65 + 1 ) );
     sigla[1] = 65 + ( rand() % ( 90 - 65 + 1 ) );
