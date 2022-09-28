@@ -2,10 +2,10 @@
 
 #include "estadual.h"
 
-Estadual::Estadual(unsigned int candidatos) {
+Estadual::Estadual() {
     srand(time(0));             // inicializa gerador de numeros aleatorios
-    votos.resize(candidatos);   // inicializa vetor de candidatos
-    for (unsigned int i=0; i<candidatos; i++)
+    votos.resize(CANDIDATOS);   // inicializa vetor de candidatos
+    for (unsigned int i=0; i<CANDIDATOS; i++)
         gerarDados(i);          // gera votos para cada candidato
 
     // gera sigla aleatoria para o estado
@@ -16,7 +16,7 @@ Estadual::Estadual(unsigned int candidatos) {
 
 void Estadual::gerarDados(unsigned int candidato) {
     for (int i=0; i<MESES; i++)
-        votos[candidato].push_back(rand() % 1000);  // gera votos aleatorios para cada mes
+        votos[candidato].push_back(rand() % 50);  // gera votos aleatorios para cada mes
     votos[candidato].resize(MESES); // garante que o vetor tenha exatamente MESES elementos
 }
 
@@ -51,6 +51,6 @@ std::vector<int> Estadual::getVotos(unsigned int candidato) {
     return votos[candidato];
 }
 
-char* Estadual::getSigla() {
+std::string Estadual::getSigla() {
     return sigla;
 }

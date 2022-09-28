@@ -4,8 +4,9 @@
 
 class Nacional {
     public:
-        Nacional();
-        void gerarEstados();
+        Nacional(int nEstados = ESTADOS);
+        void gerarEstados(int nEstados);
+        void avaliarEstabilidade();
     private:
         std::vector<Estadual> estados;
 };

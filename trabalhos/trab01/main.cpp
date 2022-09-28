@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "nacional.h"
 
 using namespace std;

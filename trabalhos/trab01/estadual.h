@@ -1,18 +1,20 @@
 #include <iostream>
 #include <vector>
+#include <string>
 
-#define MESES 7
+#define MESES       7
+#define CANDIDATOS  2
 
 class Estadual {
     public:
-        Estadual(unsigned int candidatos = 2);
+        Estadual();
         void gerarDados(unsigned int);
         double mediaMovel(int numMeses, unsigned int candidato);
         double avaliarEstabilidade(unsigned int candidato);
         std::vector<int> getVotos(unsigned int candidato);
-        char* getSigla();
+        std::string getSigla();
 
     private:
         std::vector<std::vector<int>> votos;
-        char sigla[3];
+        std::string sigla;
 };
