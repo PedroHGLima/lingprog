@@ -2,35 +2,37 @@
 
 #include "estadual.h"
 
-Estadual::Estadual() {
-    srand(time(0));
-    gerarDados();
+Estadual::Estadual(unsigned int candidatos) {
+    srand(time(0));             // inicializa gerador de numeros aleatorios
+    votos.resize(candidatos);   // inicializa vetor de candidatos
+    for (unsigned int i=0; i<candidatos; i++)
+        gerarDados(i);          // gera votos para cada candidato
+
+    // gera sigla aleatoria para o estado
     sigla[0] = 65 + ( rand() % ( 90 - 65 + 1 ) );
     sigla[1] = 65 + ( rand() % ( 90 - 65 + 1 ) );
     sigla[2] = '\0';
 }
 
-void Estadual::gerarDados() {
-    for (int i=0; i<MESES; i++) {
-        votosPorMes.push_back(rand() % 1000);
-    }
+void Estadual::gerarDados(unsigned int candidato) {
+    for (int i=0; i<MESES; i++)
+        votos[candidato].push_back(rand() % 1000);  // gera votos aleatorios para cada mes
+    votos[candidato].resize(MESES); // garante que o vetor tenha exatamente MESES elementos
 }
 
-double Estadual::mediaMovel(int numMeses) {
+double Estadual::mediaMovel(int numMeses, unsigned int candidato) {
     int soma = 0;
     for (int i=0; i<numMeses; i++) {
-        soma += votosPorMes[i];
+        soma += votos[candidato][i];
     }
-    std::cout << "Media movel de " << numMeses << " meses: " << soma / numMeses << std::endl;
     return soma / numMeses;
 }
 
-void Estadual::avaliarEstabilidade() {
-    double atual = mediaMovel(MESES);               // media movel do mes atual
-    double anterior = mediaMovel(MESES - 1);        // media movel do mes anterior
-    double varPercentual = atual/anterior*100;      // variacao percentual
+double Estadual::avaliarEstabilidade(unsigned int candidato) {
+    double atual = mediaMovel(MESES, candidato);               // media movel do mes atual
+    double anterior = mediaMovel(MESES - 1, candidato);        // media movel do mes anterior
 
-
+/*
     if (varPercentual <= 98) {
         // Variacao indica queda de 2% ou mais
         std::cout << "Em queda" << std::endl;
@@ -41,10 +43,12 @@ void Estadual::avaliarEstabilidade() {
         // Variacao indica estabilidade
         std::cout << "Estavel" << std::endl;
     }
+*/
+    return atual/anterior*100;
 }
 
-std::vector<int> Estadual::getVotosPorMes() {
-    return votosPorMes;
+std::vector<int> Estadual::getVotos(unsigned int candidato) {
+    return votos[candidato];
 }
 
 char* Estadual::getSigla() {

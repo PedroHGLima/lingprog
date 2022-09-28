@@ -6,16 +6,12 @@ using namespace std;
 
 int main() {
 
-    Estadual u;
-    cout << "Votos por mes: ";
-    for (int i=0; i<MESES; i++) {
-        cout << u.getVotosPorMes()[i] << " ";
+    Estadual estado;
+
+    for (int i = 0; i < MESES; i++){
+        cout << estado.getVotos(0)[i] << endl;
+        cout << estado.getVotos(1)[i] << endl;
     }
-
-    cout << endl << "Sigla: " << u.getSigla() << endl;
-
-    u.mediaMovel(3);
-    u.mediaMovel(7);
 
     return 0;
 }

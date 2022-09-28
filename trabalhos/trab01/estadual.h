@@ -5,14 +5,14 @@
 
 class Estadual {
     public:
-        Estadual();
-        void gerarDados();
-        double mediaMovel(int numMeses = 3);
-        void avaliarEstabilidade();
-        std::vector<int> getVotosPorMes();
+        Estadual(unsigned int candidatos = 2);
+        void gerarDados(unsigned int);
+        double mediaMovel(int numMeses, unsigned int candidato);
+        double avaliarEstabilidade(unsigned int candidato);
+        std::vector<int> getVotos(unsigned int candidato);
         char* getSigla();
 
     private:
-        std::vector<int> votosPorMes;
+        std::vector<std::vector<int>> votos;
         char sigla[3];
 };
