@@ -6,8 +6,9 @@ class Nacional {
     public:
         Nacional(int nEstados = ESTADOS);
         void gerarEstados(int nEstados);
-        void avaliarEstabilidade();
-        void avaliarEstabilidadeNacional();
+        double avaliarEstabilidade(unsigned int candidato);
+        Estadual encontrarAlta(unsigned int candidato);
+        int calcularVantagem();
         Estadual getEstado(int i);
     private:
         std::vector<Estadual> estados;

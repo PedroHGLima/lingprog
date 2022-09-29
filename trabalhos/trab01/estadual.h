@@ -9,7 +9,7 @@ class Estadual {
     public:
         Estadual();
         void gerarDados(unsigned int);
-        double mediaMovel(int numMeses, unsigned int candidato);
+        double mediaMovel(unsigned int candidato, int numMeses=3);
         double avaliarEstabilidade(unsigned int candidato);
         std::vector<int> getVotos(unsigned int candidato);
         std::string getSigla();

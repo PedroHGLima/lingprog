@@ -6,7 +6,10 @@ OBJS=main.o estadual.o nacional.o
 
 all: $(PROGRAM)
 
-exec: $(PROGRAM) clean
+exec: $(PROGRAM)
+	./$(PROGRAM)
+
+execlean: $(PROGRAM) clean
 	./$(PROGRAM)
 
 $(PROGRAM): $(OBJS)
