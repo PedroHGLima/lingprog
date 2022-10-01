@@ -7,7 +7,6 @@
  */
 
 #include <iomanip>
-#include <ctime>
 
 #include "nacional.h"
 
@@ -18,10 +17,11 @@ void evolucaoMedia(Nacional &ref) {
     /// @param ref referencia para o objeto Nacional
     char nome;
     cout << "Evolucao da media movel de cada candidato:" << endl;
+    cout << "Mes atual ===> Mes mais antigo" << endl;
     for (unsigned int i = 0; i < CANDIDATOS; i++) {
         nome = 'A' + i;
         cout << "Candidato " << nome << ": ";
-        for (int j = 3; j < MESES; j++) {
+        for (int j = 0; j < MESES-3; j++) {
             cout << ref.getEstado(i).mediaMovel(i, j) << " ";
         }
         cout << endl;
@@ -52,9 +52,9 @@ void avaliacaoDeAlta(Nacional &ref) {
 void avaliacaoNacional(Nacional &ref) {
     /// @brief Avalia a estabilidade de cada candidato, considerando todos os estados
     /// @param ref referencia para objeto Nacional
-    cout << "Estabilidade nacional:" << endl;
-    cout << "Candidato A: " << ref.avaliarEstabilidade(0) << endl;
-    cout << "Candidato B: " << ref.avaliarEstabilidade(1) << endl;
+    cout << "Taxa de crescimento nacional:" << endl;
+    cout << "Candidato A: " << ref.avaliarEstabilidade(0) << "%" << endl;
+    cout << "Candidato B: " << ref.avaliarEstabilidade(1) << "%" << endl;
 }
 
 void acharAlta(Nacional &ref) {
@@ -100,7 +100,7 @@ int main() {
             case 9:
                 cout << "1 - Evolucao da media movel de cada candidato" << endl;
                 cout << "2 - Avaliar estados em alta" << endl;
-                cout << "3 - Avaliar a estabilidade nacional" << endl;
+                cout << "3 - Avaliar crescimento em escala nacional" << endl;
                 cout << "4 - Achar estado com maior alta" << endl;
                 cout << "5 - Calcular o candidato que esta na vantagem" << endl;
                 cout << "9 - Ajuda" << endl;

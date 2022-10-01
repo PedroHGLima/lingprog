@@ -17,7 +17,13 @@ Estadual::Estadual() {
     // gera sigla aleatoria para o estado
     sigla.resize(3);
     sigla[0] = 65 + ( rand() % ( 90 - 65 + 1 ) );
+    // evita as letras K, Y e W
+    if (sigla[0] == 75 || sigla[0] == 89 || sigla[0] == 87)
+        sigla[0] += 1;
     sigla[1] = 65 + ( rand() % ( 90 - 65 + 1 ) );
+    // evita as letras K, Y e W
+    if (sigla[1] == 75 || sigla[1] == 89 || sigla[1] == 87)
+        sigla[1] += 1;
     sigla[2] = '\0';
 }
 
@@ -29,28 +35,31 @@ void Estadual::gerarDados(unsigned int candidato) {
     votos[candidato].resize(MESES); // garante que o vetor tenha exatamente MESES elementos
 }
 
-double Estadual::mediaMovel(unsigned int candidato, int numMeses) {
-    /// @brief Calcula a media movel de um candidato
+double Estadual::mediaMovel(unsigned int candidato, int mes) {
+    /// @brief Calcula a media movel de um candidato num espaco de 3 meses
     /// @param candidato candidato a ser calculado
-    /// @param numMeses numero de meses a serem considerados [3,7]
+    /// @param mes mes para o qual a media movel sera calculada
     /// @return valor da media movel
-    if (numMeses < 3 || numMeses > MESES) {
-        std::cout << "Numero de meses invalido" << std::endl;
+    int soma=0, total=0;
+    
+    if (mes < 0 || mes >= MESES-3) {
+        std::cout << "Mes invalido" << std::endl;
         return -1;
     }
-    int soma = 0;
-    for (int i=0; i<numMeses; i++) {
-        soma += votos.at(candidato).at(i);
+    for (int i=mes; total<3; i++) {
+        soma += votos[candidato][i];
+        total++;
     }
-    return soma / numMeses;
+    return soma / total;
 }
 
 double Estadual::avaliarEstabilidade(unsigned int candidato) {
     /// @brief Calcula a estabilidade de um candidato
     /// @param candidato candidato a ser calculado
     /// @return valor da variacao percentual
-    double atual = mediaMovel(candidato, MESES);               // media movel do mes atual
-    double anterior = mediaMovel(candidato, MESES - 1);        // media movel do mes anterior
+    double atual = mediaMovel(candidato, 0);              // media movel do mes atual
+    double anterior = mediaMovel(candidato, 1);           // media movel do mes anterior
+    anterior == 0 ? anterior = 1 : anterior = anterior;   // evita divisao por zero
     return atual/anterior*100;
 }
 

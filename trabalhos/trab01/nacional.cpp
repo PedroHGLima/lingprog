@@ -6,6 +6,8 @@
  * @date 2022-09-29
  */
 
+#include <ctime>
+
 #include "nacional.h"
 
 Nacional::Nacional(int nEstados) {
@@ -29,8 +31,9 @@ double Nacional::avaliarEstabilidade(unsigned int candidato) {
     /// @param candidato candidato a ser avaliado
     int soma=0, total=(int)estados.size();
 
-    for (size_t i = 0; i < estados.size(); i++)
+    for (size_t i = 0; i < estados.size(); i++){
         soma += estados[i].avaliarEstabilidade(candidato);
+    }
 
     return soma/total;
 }
