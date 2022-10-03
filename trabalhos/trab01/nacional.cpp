@@ -17,6 +17,24 @@ Nacional::Nacional(int nEstados) {
     gerarEstados(nEstados);     // gera nEstados estados
 }
 
+double Nacional::mediaMovel(unsigned int candidato, int mes) {
+    /// @brief Calcula a media movel de um candidato num espaco de 3 meses
+    /// @param candidato candidato a ser calculado
+    /// @param mes mes para o qual a media movel sera calculada
+    /// @return valor da media movel
+    double soma=0, total=0;
+    
+    if (mes < 0 || mes >= MESES-3) {
+        std::cout << "Mes invalido" << std::endl;
+        return -1;
+    }
+    for (unsigned int i=0; i<estados.size(); i++) {
+        soma += estados[i].mediaMovel(candidato, mes);
+        total++;
+    }
+    return soma / total;
+}
+
 void Nacional::gerarEstados(int nEstados) {
     /// @brief controi os estados
     /// @param nEstados numero de estados a serem criados

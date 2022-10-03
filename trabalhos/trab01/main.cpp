@@ -16,14 +16,24 @@ void evolucaoMedia(Nacional &ref) {
     /// @brief imprime a evolucao da media movel de cada candidato
     /// @param ref referencia para o objeto Nacional
     char nome;
+    cout.precision(2);
+
     cout << "Evolucao da media movel de cada candidato:" << endl;
-    cout << "Mes atual ===> Mes mais antigo" << endl;
+    cout << "Mes atual ===> Mes mais antigo" << fixed << endl;
     for (unsigned int i = 0; i < CANDIDATOS; i++) {
+        // Percorre todos os candidatos
         nome = 'A' + i;
-        cout << "Candidato " << nome << ": ";
-        for (int j = 0; j < MESES-3; j++) {
-            cout << ref.getEstado(i).mediaMovel(i, j) << " ";
+        cout << "Candidato " << nome << ": " << endl;
+        for (int j = 0; j < ESTADOS; j++) {
+            // Percorre todos os estados
+            cout << "Estado " << ref.getEstado(j).getSigla() << ": ";
+            for (int k = 0; k < MESES-3; k++) {
+                // Percorre todos os meses, 3 eh o espaco de tempo da media movel
+                cout << ref.getEstado(j).mediaMovel(i, k) << " ";
+            }
+            cout << endl;
         }
+        cout << "Media movel nacional: " << ref.mediaMovel(i) << endl;
         cout << endl;
     }
 }
@@ -98,6 +108,7 @@ int main() {
                 acharVantagem(br);
                 break;
             case 9:
+                cout << "Este programa se refere aos estados usando suas siglas, geradas automaticamente." << endl;
                 cout << "1 - Evolucao da media movel de cada candidato" << endl;
                 cout << "2 - Avaliar estados em alta" << endl;
                 cout << "3 - Avaliar crescimento em escala nacional" << endl;

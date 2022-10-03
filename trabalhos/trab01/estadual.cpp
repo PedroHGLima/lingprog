@@ -40,7 +40,7 @@ double Estadual::mediaMovel(unsigned int candidato, int mes) {
     /// @param candidato candidato a ser calculado
     /// @param mes mes para o qual a media movel sera calculada
     /// @return valor da media movel
-    int soma=0, total=0;
+    double soma=0, total=0;
     
     if (mes < 0 || mes >= MESES-3) {
         std::cout << "Mes invalido" << std::endl;
