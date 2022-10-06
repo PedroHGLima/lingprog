@@ -3,5 +3,7 @@
 !*.*
 *.o
 *.exe
+*.rar
+*.zip
 !makefile
 .vscode
