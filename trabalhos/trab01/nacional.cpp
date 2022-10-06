@@ -61,10 +61,10 @@ Estadual Nacional::encontrarAlta(unsigned int candidato){
     /// @param candidato candidato a ser avaliado
     /// @return estado com maior estabilidade
     Estadual estado = estados[0];
-    double valor, maior = estado.mediaMovel(candidato);
+    double valor, maior = estado.avaliarEstabilidade(candidato);
 
     for (size_t i = 1; i < estados.size(); i++) {
-        valor = estados[i].mediaMovel(candidato);
+        valor = estados[i].avaliarEstabilidade(candidato);
         if (valor > maior) {
         // Se o valor for maior do que o registrado, atualiza o maior valor
             maior = valor;
@@ -80,7 +80,7 @@ int Nacional::calcularVantagem() {
     /// @return numero de estados em que o candidato tem vantagem
     /// @bug em caso de empate, o candidato que alcanca a vantagem primeiro eh considerado o vencedor
     unsigned int vantagem = 0;      // o candidato que esta na vantagem
-    int maior=0, atual;            // votos dos candidatos com vantagem e sendo analizado
+    int maior=0, atual;             // votos dos candidatos com vantagem e sendo analizado
 
     for (unsigned int i = 0; i < CANDIDATOS; i++) {
         atual = 0;

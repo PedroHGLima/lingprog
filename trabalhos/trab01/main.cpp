@@ -33,7 +33,11 @@ void evolucaoMedia(Nacional &ref) {
             }
             cout << endl;
         }
-        cout << "Media movel nacional: " << ref.mediaMovel(i) << endl;
+        cout << "Media movel nacional: " << endl;
+        for (int k = 0; k < MESES-3; k++) {
+            // Percorre todos os meses, 3 eh o espaco de tempo da media movel
+            cout << ref.mediaMovel(i, k) << " ";
+        }
         cout << endl;
     }
 }
@@ -41,22 +45,43 @@ void evolucaoMedia(Nacional &ref) {
 void avaliacaoDeAlta(Nacional &ref) {
     /// @brief Percorre todos os estados, printando em forma de tabela se o estado apresenta uma alta para tal candidato.
     /// @param ref referencia para objeto Nacional
-    cout << "Estados em alta para cada candidato:" << endl;
-    cout << "Candidato A" << setw(15) << "Candidato B" << endl;
-    for (int i = 0; i < ESTADOS; i++){
-        if (ref.getEstado(i).avaliarEstabilidade(0) > 102)
-        // Se o candidato A esta em alta (2%)
-            cout << setw(7) << ref.getEstado(i).getSigla() << setw(16);
-        else
-        // Nao esta em alta
-            cout << setw(22);
-        if (ref.getEstado(i).avaliarEstabilidade(1) > 102)
-        // Se o candidato B esta em alta (2%)
-            cout << ref.getEstado(i).getSigla() << endl;
-        else
-        // Nao esta em alta
-            cout << endl;
-    }    
+
+    double taxa;
+    vector<vector<string>> tabela;
+    tabela.resize(3); // Uma linha para alta, estavel e baixa
+
+    for (int i = 0; i < CANDIDATOS; i++) {
+        for (int j = 0; j < ESTADOS; j++){
+            taxa = ref.getEstado(j).avaliarEstabilidade(i);
+            if (taxa > 102) {
+                tabela[0].push_back(ref.getEstado(j).getSigla());
+            }
+            else if (taxa >= 98) {
+                tabela[1].push_back(ref.getEstado(j).getSigla());
+            }
+            else {
+                tabela[2].push_back(ref.getEstado(j).getSigla());
+            }
+        }
+        cout << "Candidato " << (char)('A' + i) << ": " << endl;
+        cout << "Estados em alta: ";
+        for (int j = 0; j < tabela[0].size(); j++) {
+            cout << tabela[0][j] << " ";
+        }
+        cout << endl;
+        cout << "Estados em estabilidade: ";
+        for (int j = 0; j < tabela[1].size(); j++) {
+            cout << tabela[1][j] << " ";
+        }
+        cout << endl;
+        cout << "Estados em baixa: ";
+        for (int j = 0; j < tabela[2].size(); j++) {
+            cout << tabela[2][j] << " ";
+        }
+        cout << endl;
+        for (int i = 0; i < 3; i++)
+            tabela.at(i).clear();
+    }
 }
 
 void avaliacaoNacional(Nacional &ref) {
