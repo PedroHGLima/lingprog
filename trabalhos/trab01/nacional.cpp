@@ -75,6 +75,25 @@ Estadual Nacional::encontrarAlta(unsigned int candidato){
     return estado;
 }
 
+Estadual Nacional::encontrarBaixa(unsigned int candidato) {
+    /// @brief encontra o estado com maior queda
+    /// @param candidato candidato a ser avaliado
+    /// @return estado com maior queda
+    Estadual estado = estados[0];
+    double valor, menor = estado.avaliarEstabilidade(candidato);
+
+    for (size_t i = 1; i < estados.size(); i++) {
+        valor = estados[i].avaliarEstabilidade(candidato);
+        if (valor < menor) {
+        // Se o valor for menor do que o registrado, atualiza o menor valor
+            menor = valor;
+            estado = estados[i];
+        }
+    }
+
+    return estado;
+}
+
 int Nacional::calcularVantagem() {
     /// @brief calcula a vantagem de um candidato
     /// @return numero de estados em que o candidato tem vantagem

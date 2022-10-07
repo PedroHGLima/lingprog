@@ -65,17 +65,17 @@ void avaliacaoDeAlta(Nacional &ref) {
         }
         cout << "Candidato " << (char)('A' + i) << ": " << endl;
         cout << "Estados em alta: ";
-        for (int j = 0; j < tabela[0].size(); j++) {
+        for (unsigned int j = 0; j < tabela[0].size(); j++) {
             cout << tabela[0][j] << " ";
         }
         cout << endl;
         cout << "Estados em estabilidade: ";
-        for (int j = 0; j < tabela[1].size(); j++) {
+        for (unsigned int j = 0; j < tabela[1].size(); j++) {
             cout << tabela[1][j] << " ";
         }
         cout << endl;
         cout << "Estados em baixa: ";
-        for (int j = 0; j < tabela[2].size(); j++) {
+        for (unsigned int j = 0; j < tabela[2].size(); j++) {
             cout << tabela[2][j] << " ";
         }
         cout << endl;
