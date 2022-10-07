@@ -98,6 +98,10 @@ void acharAlta(Nacional &ref) {
     cout << "Estado com maior alta:" << endl;
     cout << "Candidato A: " << ref.encontrarAlta(0).getSigla() << endl;
     cout << "Candidato B: " << ref.encontrarAlta(1).getSigla() << endl;
+
+    cout << "Estado com maior baixa:" << endl;
+    cout << "Candidato A: " << ref.encontrarBaixa(0).getSigla() << endl;
+    cout << "Candidato B: " << ref.encontrarBaixa(1).getSigla() << endl;
 }
 
 void acharVantagem(Nacional &ref) {
