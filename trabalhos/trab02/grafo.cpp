@@ -36,23 +36,22 @@ int Grafo::dijkstra(int origem, int destino) {
     /// @param origem Vertice de origem.
     /// @param destino Vertice de destino.
     /// @return Valor do menor caminho entre os vértices origem e destino.
-    int dist[tamanho], visitados[tamanho];
+    int distancias[tamanho], visitados[tamanho];
 
     // fila de prioridades de pair (distancia, vértice)
     priority_queue < pair<int, int>, vector<pair<int, int> >, greater<pair<int, int> > > pq;
 
     // inicia o vetor de distâncias e visitados
-    for(int i = 0; i < tamanho; i++)
-    {
-        dist[i] = INFINITO;
+    for(int i = 0; i < tamanho; i++) {
+        distancias[i] = INFINITO;
         visitados[i] = false;
     }
 
     // a distância de origem para origem é 0
-    dist[origem] = 0;
+    distancias[origem] = 0;
 
     // insere na fila
-    pq.push(make_pair(dist[origem], origem));
+    pq.push(make_pair(0, origem));
 
     // loop do algoritmo
     while(!pq.empty())
@@ -77,18 +76,18 @@ int Grafo::dijkstra(int origem, int destino) {
                 int custo_aresta = it->second;
 
                 // relaxamento (u, v)
-                if(dist[v] > (dist[u] + custo_aresta))
+                if(distancias[v] > (distancias[u] + custo_aresta))
                 {
                     // atualiza a distância de "v" e insere na fila
-                    dist[v] = dist[u] + custo_aresta;
-                    pq.push(make_pair(dist[v], v));
+                    distancias[v] = distancias[u] + custo_aresta;
+                    pq.push(make_pair(distancias[v], v));
                 }
             }
         }
     }
 
     // retorna a distância mínima até o destino
-    return dist[destino];
+    return distancias[destino];
 }
 
 int Grafo::get_tamanho() {
