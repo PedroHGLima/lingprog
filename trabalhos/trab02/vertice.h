@@ -4,9 +4,9 @@ using namespace std;
 
 class Vertice {
     public:
-        Vertice(char id);
-        char getId();
-        void setId(int id);
+        Vertice (int id);
+        int get_id ();
+        void set_id (int id);
     private:
-        char id;
+        int id;
 };

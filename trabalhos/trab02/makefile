@@ -22,4 +22,4 @@ clean:
 	rm -vf $(OBJS)
 
 clean-all:
-	rm -vf $(OBJS) $(PROGRAM)
+	rm -vf $(OBJS) $(PROGRAM) *.out
