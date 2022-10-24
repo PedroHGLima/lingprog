@@ -13,6 +13,7 @@
 #include <sstream>
 #include <fstream>
 #include <algorithm>
+#include <iomanip>
 
 #include "grafo.h"
 
@@ -45,9 +46,14 @@ vector<vector<int> > ler_arquivo(string nome_arquivo) {
         // Lê o arquivo linha por linha
         getline(arquivo, linha);
         while (getline(arquivo, linha)) {
+            // Adiciona os dados da linha ao vector de dados
             vector<string> aresta = split(linha);
             origens.push_back(stoi((aresta[0])));
             destinos.push_back(stoi((aresta[1])));
+            pesos.push_back(stoi((aresta[2])));
+            // Adiciona os dados na ordem inversa
+            origens.push_back(stoi((aresta[1])));
+            destinos.push_back(stoi((aresta[0])));
             pesos.push_back(stoi((aresta[2])));
         }
         arquivo.close();
@@ -72,6 +78,18 @@ vector<vector<int> > ler_arquivo(string nome_arquivo) {
     return dados;
 }
 
+void imprimirEnlaces(Grafo &ref) {
+    /// @brief Imprime os vertices do grafo.
+    /// @param ref Referencia para o grafo.
+    list<pair<int, int> > *adjacencias = ref.getAdj();
+    vector<Vertice> vertices = ref.getVertices();
+
+    cout << "Vertices" << setw(10) << "Enlaces" << endl;
+    for (int i =0 ; i < ref.getTamanho(); i++) {
+        cout << vertices[i].get_id() << setw(11) << adjacencias[i].size() << endl;
+    }
+}
+
 int main () {
     int tamanho;
     vector <vector<int> > dados;
@@ -80,11 +98,21 @@ int main () {
     dados = ler_arquivo("exemplo.csv");
     tamanho = dados.at(3).size();
     Grafo grafo(tamanho);
+
+    // Adiciona as arestas
     for (size_t i = 0; i < dados[0].size(); i++) {
-        grafo.add_aresta(dados[0][i], dados[1][i], dados[2][i]);
+        grafo.addAresta(dados[0][i], dados[1][i], dados[2][i]);
     }
 
-    cout << grafo.dijkstra(0, 3) << endl;
+    // Adiciona os vertices
+    for (size_t i = 0; i < dados[3].size(); i++) {
+        grafo.addVertice(dados[3][i]);
+    }
+
+    // Imprime os vertices e o numero de enlaces
+    imprimirEnlaces(grafo);
+
+    //cout << grafo.dijkstra(0, 2) << endl;
 
     return 0;
 }

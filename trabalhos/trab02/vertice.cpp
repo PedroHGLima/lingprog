@@ -9,7 +9,7 @@
 #include "vertice.h"
 
 Vertice::Vertice(int id) {
-    this->id = -1; // Valor placeholder
+    this->id = id;
 }
 
 int Vertice::get_id() {

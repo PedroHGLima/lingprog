@@ -20,12 +20,21 @@ Grafo::Grafo(int tamanho) {
     adj = new list<pair<int, int> >[tamanho];
 }
 
-void Grafo::add_aresta(Aresta *aresta) {
+void Grafo::addVertice(Vertice *vertice) {
+    this->vertices.push_back(*vertice);
+}
+
+void Grafo::addVertice(int id) {
+    Vertice *vertice = new Vertice(id);
+    this->vertices.push_back(*vertice);
+}
+
+void Grafo::addAresta(Aresta *aresta) {
     this->arestas.push_back(*aresta);
     this->adj[aresta->get_origem()->get_id()].push_back(make_pair(aresta->get_destino()->get_id(), aresta->get_peso()));
 }
 
-void Grafo::add_aresta(int origem, int destino, int peso) {
+void Grafo::addAresta(int origem, int destino, int peso) {
     Aresta *aresta = new Aresta(new Vertice(origem), new Vertice(destino), peso);
     this->arestas.push_back(*aresta);
     adj[origem].push_back(make_pair(destino, peso));
@@ -90,11 +99,19 @@ int Grafo::dijkstra(int origem, int destino) {
     return distancias[destino];
 }
 
-int Grafo::get_tamanho() {
+list<pair<int, int> >* Grafo::getAdj() {
+    return this->adj;
+}
+
+vector<Vertice> Grafo::getVertices() {
+    return this->vertices;
+}
+
+int Grafo::getTamanho() {
     return this->tamanho;
 }
 
-void Grafo::set_tamanho(int tamanho) {
+void Grafo::setTamanho(int tamanho) {
     this->tamanho = tamanho;
     adj = new list<pair<int, int> >[tamanho];
 }
