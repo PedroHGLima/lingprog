@@ -51,12 +51,18 @@ vector<vector<int> > ler_arquivo(string nome_arquivo) {
             origens.push_back(stoi((aresta[0])));
             destinos.push_back(stoi((aresta[1])));
             pesos.push_back(stoi((aresta[2])));
-            // Adiciona os dados na ordem inversa
-            origens.push_back(stoi((aresta[1])));
-            destinos.push_back(stoi((aresta[0])));
-            pesos.push_back(stoi((aresta[2])));
         }
         arquivo.close();
+
+        // Adiciona as arestas na ordem inversa
+        // Isso é necessário para que o algoritmo de Dijkstra funcione corretamente
+        // Implica que a lista de arestas na verdade sera metade do tamanho da lista aqui presente
+        size_t tamanho = origens.size();
+        for (size_t i =0; i<tamanho; i++) {
+            origens.push_back(destinos[i]);
+            destinos.push_back(origens[i]);
+            pesos.push_back(pesos[i]);
+        }
 
 
         // Todos os vertices com conexoes devem aparecer na lista de origens e destinos
@@ -81,12 +87,37 @@ vector<vector<int> > ler_arquivo(string nome_arquivo) {
 void imprimirEnlaces(Grafo &ref) {
     /// @brief Imprime os vertices do grafo.
     /// @param ref Referencia para o grafo.
+    char sigla = 'A';
     list<pair<int, int> > *adjacencias = ref.getAdj();
     vector<Vertice> vertices = ref.getVertices();
 
     cout << "Vertices" << setw(10) << "Enlaces" << endl;
     for (int i =0 ; i < ref.getTamanho(); i++) {
-        cout << vertices[i].get_id() << setw(11) << adjacencias[i].size() << endl;
+        sigla += (char)vertices[i].get_id();
+        cout << sigla << setw(11) << adjacencias[i].size() << endl;
+        sigla = 'A';
+    }
+}
+
+void imprimirArestas(Grafo &ref) {
+    /// @brief Imprime os vertices do grafo, seguido de suas arestas e respectivos pesos
+    /// @param ref referencia para o grafo
+    char sigla = 'A';
+    cout << "Vertices: ";
+    for (int i =0 ; i < ref.getTamanho(); i++) {
+        // Imprime os vertices
+        sigla += (char)ref.getVertices()[i].get_id();
+        cout << sigla << " ";
+        sigla = 'A';
+    }
+
+    cout << endl << "Arestas" << setw(8) << "Peso" << endl;
+    vector<Aresta> arestas = ref.getArestas();
+    for (size_t i=0; i<arestas.size()/2; i++) {
+        // Imprime as arestas
+        sigla += (char)arestas[i].get_origem()->get_id();
+        cout << sigla << (char)(arestas[i].get_destino()->get_id() + 'A') << setw(10) << arestas[i].get_peso() << endl;
+        sigla = 'A';
     }
 }
 
@@ -111,6 +142,11 @@ int main () {
 
     // Imprime os vertices e o numero de enlaces
     imprimirEnlaces(grafo);
+    cout << endl;
+
+    // Imprime as arestas e seus pesos
+    imprimirArestas(grafo);
+    cout << endl;
 
     //cout << grafo.dijkstra(0, 2) << endl;
 

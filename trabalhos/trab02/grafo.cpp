@@ -107,6 +107,10 @@ vector<Vertice> Grafo::getVertices() {
     return this->vertices;
 }
 
+vector<Aresta> Grafo::getArestas() {
+    return this->arestas;
+}
+
 int Grafo::getTamanho() {
     return this->tamanho;
 }

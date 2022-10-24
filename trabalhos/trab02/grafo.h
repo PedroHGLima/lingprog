@@ -12,6 +12,7 @@ class Grafo {
         void setTamanho (int tamanho);
         void addAresta (Aresta *aresta);
         void addAresta(int origem, int destino, int peso);
+        vector<Aresta> getArestas ();
         void addVertice (Vertice *vertice);
         void addVertice (int id);
         vector<Vertice> getVertices();
