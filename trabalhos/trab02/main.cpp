@@ -121,6 +121,65 @@ void imprimirArestas(Grafo &ref) {
     }
 }
 
+void mostrarCaminho(Grafo &ref) {
+    char sigla = 'A';
+    char origem, destino;
+    vector<int> caminho;
+
+    for(;;){
+        cout << "Digite o vertice de origem: "; cin >> origem;
+        if (origem >= 'A' && origem <= 'Z') {
+            // Entrada correta da origem
+            break;
+        }
+        else if (origem >= 'a' && origem <= 'z') {
+            // Entrada minuscula da origem, converte para maiuscula
+            origem -= 32;
+            break;
+        }
+        else {
+            // Caso invalido
+            cout << "Entrada invalida" << endl;
+        }
+        cout << "Vertice invalido" << endl;
+    }
+
+    for (;;) {
+        cout << "Digite o vertice de destino: "; cin >> destino;
+        if (destino >= 'A' && destino <= 'Z') {
+            // Entrada correta do destino
+            break;
+        }
+        else if (destino >= 'a' && destino <= 'z') {
+            // Entrada minuscula do destino, converte para maiuscula
+            destino -= 32;
+            break;
+        }
+        else {
+            // Caso invalido
+            cout << "Entrada invalida" << endl;
+        }
+    }
+
+    if ((origem > (char)ref.getTamanho()+'@' || origem < 'A') || (destino > (char)ref.getTamanho()+'@' || destino < 'A')) {
+        // Caso um dos vertices nao exista
+        cout << "Vertice invalido" << endl;
+        return;
+    }
+
+    caminho = ref.dijkstra(origem, destino);
+
+    cout << "Caminho: ";
+    for (size_t i=0; i<caminho.size()-2; i++) {
+        sigla += (char)caminho[i];
+        cout << sigla << " -> ";
+        sigla = 'A';
+    }
+    cout << destino << endl;
+
+    cout << "Custo: " << caminho.back();
+}
+
 int main () {
     int tamanho;
     vector <vector<int> > dados;
@@ -148,7 +207,9 @@ int main () {
     imprimirArestas(grafo);
     cout << endl;
 
-    //cout << grafo.dijkstra(0, 2) << endl;
+    // Imprime o caminho mais curto entre dois vertices
+    mostrarCaminho(grafo);
+    cout << endl;
 
     return 0;
 }

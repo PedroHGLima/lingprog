@@ -17,7 +17,8 @@ class Grafo {
         void addVertice (int id);
         vector<Vertice> getVertices();
         list<pair<int, int> >* getAdj();
-        int dijkstra (int origem, int destino);
+        vector<int> dijkstra (int origem, int destino);
+        vector<int> dijkstra (char origem, char destino);
     private:
         int tamanho;
         list<pair<int, int> > * adj;

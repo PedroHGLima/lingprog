@@ -40,12 +40,13 @@ void Grafo::addAresta(int origem, int destino, int peso) {
     adj[origem].push_back(make_pair(destino, peso));
 }
 
-int Grafo::dijkstra(int origem, int destino) {
+vector<int> Grafo::dijkstra(int origem, int destino) {
     /// @brief Calcula o menor caminho entre dois vértices, usando o algoritmo de Dijkstra.
     /// @param origem Vertice de origem.
     /// @param destino Vertice de destino.
-    /// @return Valor do menor caminho entre os vértices origem e destino.
+    /// @return Caminho ate o destino, o ultimo elemento do vetor eh o peso do caminho.
     int distancias[tamanho], visitados[tamanho];
+    vector <vector<int> > caminho(tamanho);
 
     // fila de prioridades de pair (distancia, vértice)
     priority_queue < pair<int, int>, vector<pair<int, int> >, greater<pair<int, int> > > pq;
@@ -54,10 +55,12 @@ int Grafo::dijkstra(int origem, int destino) {
     for(int i = 0; i < tamanho; i++) {
         distancias[i] = INFINITO;
         visitados[i] = false;
+        caminho[i] = {i};
     }
 
     // a distância de origem para origem é 0
     distancias[origem] = 0;
+    caminho[origem] = {origem};
 
     // insere na fila
     pq.push(make_pair(0, origem));
@@ -89,14 +92,20 @@ int Grafo::dijkstra(int origem, int destino) {
                 {
                     // atualiza a distância de "v" e insere na fila
                     distancias[v] = distancias[u] + custo_aresta;
+                    caminho[v].insert(caminho[v].begin(), caminho[u].begin(), caminho[u].end());
                     pq.push(make_pair(distancias[v], v));
                 }
             }
         }
     }
 
-    // retorna a distância mínima até o destino
-    return distancias[destino];
+    caminho[destino].push_back(distancias[destino]);
+    // retorna o caminho minimo ate o destino
+    return caminho[destino];
+}
+
+vector<int> Grafo::dijkstra(char origem, char destino) {
+    return dijkstra(int(origem) - 'A', int(destino) - 'A');
 }
 
 list<pair<int, int> >* Grafo::getAdj() {
