@@ -200,7 +200,7 @@ void verificarConectividade(Grafo &ref) {
 
 int main () {
     int tamanho, comando=9;
-    string nome = "exemplo.csv";
+    string nome = "arestas.csv";
     vector <vector<int> > dados;
     
     // Cria o grafo
@@ -242,11 +242,13 @@ int main () {
                 verificarConectividade(grafo);
                 cout << endl;
                 break;
-            case 5:
+            case 5: {
+                Vertice v;
                 // Imprime o vertice mais central
-                Vertice v = grafo.maisCentral();
-                cout << "Vertice mais central: " << (char)(v.get_id() + 'A') << endl;
+                v = grafo.maisCentral();
+                cout << "Vertice mais central: " << (char)(v.get_id() + 'A') << endl << endl;
                 break;
+                }
             case 9:
                 // Apresenta o menu
                 cout << "1 - Imprimir enlaces" << endl;
@@ -263,7 +265,6 @@ int main () {
             default:
                 // Caso o comando seja invalido
                 cout << "Comando invalido" << endl;
-                break;
         }
         cout << "Digite o comando: "; cin >> comando;
     }

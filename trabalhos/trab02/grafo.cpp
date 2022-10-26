@@ -166,7 +166,6 @@ Vertice Grafo::maisCentral() {
     for (int i = 0; i < tamanho; i++) {
         // Percorre todos os vertices do grafo, exceto o primeiro
         ligacoes = adj[i].size();
-        cout << "Vertice " << i << " tem " << ligacoes << " ligacoes" << endl;
         // O numero de conexoes de um vertice eh o tamanho da lista de adjacencia
         if (ligacoes > maior) {
             maior = ligacoes;
