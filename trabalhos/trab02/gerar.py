@@ -12,12 +12,13 @@ def main():
     for i in range(n_arestas):
         origem = rd.choice(ids)
         destino = rd.choice(ids)
-        while (origem == destino) or ((origem, destino) in arestas):
+        while (origem == destino) or ((origem, destino) in arestas) or ((destino, origem) in arestas):
             origem = rd.choice(ids)
             destino = rd.choice(ids)
         peso = rd.randint(1, 20)
         f.write(f'{origem},{destino},{peso}\n')
         arestas.add((origem, destino))
+        arestas.add((destino, origem))
 
     f.close()
 
