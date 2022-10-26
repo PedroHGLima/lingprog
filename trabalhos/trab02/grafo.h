@@ -19,6 +19,8 @@ class Grafo {
         list<pair<int, int> >* getAdj();
         vector<int> dijkstra (int origem, int destino);
         vector<int> dijkstra (char origem, char destino);
+        bool isConexo ();
+        Vertice maisCentral ();
     private:
         int tamanho;
         list<pair<int, int> > * adj;

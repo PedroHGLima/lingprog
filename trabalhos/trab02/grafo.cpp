@@ -108,6 +108,75 @@ vector<int> Grafo::dijkstra(char origem, char destino) {
     return dijkstra(int(origem) - 'A', int(destino) - 'A');
 }
 
+bool Grafo::isConexo() {
+    /// @brief Verifica se o grafo é conexo.
+    /// @return True se o grafo for conexo, false caso contrario.
+    int visitados[tamanho];
+    queue<int> fila;
+
+    // inicia o vetor de visitados
+    for(int i = 0; i < tamanho; i++) {
+        visitados[i] = false;
+    }
+
+    // marca o primeiro vertice como visitado
+    visitados[0] = true;
+    fila.push(0);
+
+    // loop do algoritmo
+    while(!fila.empty())
+    {
+        int u = fila.front(); // extrai o vértice do topo
+        fila.pop(); // remove da fila
+
+        list<pair<int, int> >::iterator it;
+
+        // percorre os vértices "v" adjacentes de "u"
+        for(it = adj[u].begin(); it != adj[u].end(); it++)
+        {
+            // obtém o vértice adjacente
+            int v = it->first;
+
+            // verifica se o vértice não foi visitado
+            if(visitados[v] == false)
+            {
+                // marca como visitado
+                visitados[v] = true;
+                fila.push(v);
+            }
+        }
+    }
+
+    // verifica se todos os vertices foram visitados
+    for(int i = 0; i < tamanho; i++) {
+        if(visitados[i] == false) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+Vertice Grafo::maisCentral() {
+    /// @brief Calcula o vertice com maior centralidade do grafo
+    /// @return Vertice mais central
+    int i_central = 0, ligacoes, maior = adj[0].size();
+    // Inicia os valores considerando que o primeiro vertice eh o mais central
+
+    for (int i = 0; i < tamanho; i++) {
+        // Percorre todos os vertices do grafo, exceto o primeiro
+        ligacoes = adj[i].size();
+        cout << "Vertice " << i << " tem " << ligacoes << " ligacoes" << endl;
+        // O numero de conexoes de um vertice eh o tamanho da lista de adjacencia
+        if (ligacoes > maior) {
+            maior = ligacoes;
+            i_central = i;
+        }
+    }
+    
+    return vertices[i_central];
+}
+
 list<pair<int, int> >* Grafo::getAdj() {
     return this->adj;
 }

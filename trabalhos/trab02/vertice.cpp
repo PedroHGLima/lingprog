@@ -8,6 +8,10 @@
 
 #include "vertice.h"
 
+Vertice::Vertice() {
+    this->id = -1; // -1 é um valor inválido para um vértice
+}
+
 Vertice::Vertice(int id) {
     this->id = id;
 }

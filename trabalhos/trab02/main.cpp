@@ -38,6 +38,8 @@ vector<vector<int> > ler_arquivo(string nome_arquivo) {
     /// @return Vector com os dados do arquivo [origens, destinos, pesos, vertices].
     vector<vector<int> > dados;
     dados.resize(4);
+    char c;
+    int maior;
     vector<int> origens, destinos, pesos, vertices;
     ifstream arquivo(nome_arquivo);
     string linha;
@@ -48,8 +50,10 @@ vector<vector<int> > ler_arquivo(string nome_arquivo) {
         while (getline(arquivo, linha)) {
             // Adiciona os dados da linha ao vector de dados
             vector<string> aresta = split(linha);
-            origens.push_back(stoi((aresta[0])));
-            destinos.push_back(stoi((aresta[1])));
+            c = aresta[0][0];
+            origens.push_back((int) c - 65);
+            c = aresta[1][0];
+            destinos.push_back(int(c) - 65);
             pesos.push_back(stoi((aresta[2])));
         }
         arquivo.close();
@@ -69,9 +73,12 @@ vector<vector<int> > ler_arquivo(string nome_arquivo) {
         vertices = origens;
         vertices.insert(vertices.end(), destinos.begin(), destinos.end());
 
-        // Remove duplicatas
-        sort(vertices.begin(), vertices.end());
-        vertices.erase(unique(vertices.begin(), vertices.end()), vertices.end());
+        // Caso um vertice nao tenha conexoes, ele nao apareceu ate entao e deve ser adicionado agora
+        maior = *max_element(vertices.begin(), vertices.end());
+        vertices.resize(maior + 1);
+        for (size_t i = 0; i < vertices.size(); i++) {
+            vertices.at(i) = (int) i;
+        }
     }
     else {
         cout << "Não foi possível abrir o arquivo";
@@ -180,12 +187,24 @@ void mostrarCaminho(Grafo &ref) {
     cout << "Custo: " << caminho.back();
 }
 
+void verificarConectividade(Grafo &ref) {
+    bool conectado;
+    conectado = ref.isConexo();
+    if (conectado) {
+        cout << "O grafo e conexo" << endl;
+    }
+    else {
+        cout << "O grafo nao e conexo" << endl;
+    }
+}
+
 int main () {
-    int tamanho;
+    int tamanho, comando=9;
+    string nome = "exemplo.csv";
     vector <vector<int> > dados;
     
     // Cria o grafo
-    dados = ler_arquivo("exemplo.csv");
+    dados = ler_arquivo(nome);
     tamanho = dados.at(3).size();
     Grafo grafo(tamanho);
 
@@ -199,17 +218,57 @@ int main () {
         grafo.addVertice(dados[3][i]);
     }
 
-    // Imprime os vertices e o numero de enlaces
-    imprimirEnlaces(grafo);
-    cout << endl;
+    cout << "Grafo criado com o arquivo " << nome << endl;
 
-    // Imprime as arestas e seus pesos
-    imprimirArestas(grafo);
-    cout << endl;
+    for (;;){
+        switch (comando) {
+            case 1:
+                // Imprime os vertices e o numero de enlaces
+                imprimirEnlaces(grafo);
+                cout << endl;
+                break;
+            case 2:
+                // Imprime as arestas e seus pesos
+                imprimirArestas(grafo);
+                cout << endl;
+                break;
+            case 3:
+                // Imprime o caminho mais curto entre dois vertices
+                mostrarCaminho(grafo);
+                cout << endl;
+                break;
+            case 4:
+                // Verifica se o grafo e conexo
+                verificarConectividade(grafo);
+                cout << endl;
+                break;
+            case 5:
+                // Imprime o vertice mais central
+                Vertice v = grafo.maisCentral();
+                cout << "Vertice mais central: " << (char)(v.get_id() + 'A') << endl;
+                break;
+            case 9:
+                // Apresenta o menu
+                cout << "1 - Imprimir enlaces" << endl;
+                cout << "2 - Imprimir arestas" << endl;
+                cout << "3 - Imprimir caminho" << endl;
+                cout << "4 - Verificar conectividade" << endl;
+                cout << "5 - Imprimir vertice mais central" << endl;
+                cout << "9 - Exibir menu" << endl;
+                cout << "0 - Sair" << endl;
+                break;
+            case 0:
+                // Sai do programa
+                return 0;
+            default:
+                // Caso o comando seja invalido
+                cout << "Comando invalido" << endl;
+                break;
+        }
+        cout << "Digite o comando: "; cin >> comando;
+    }
 
-    // Imprime o caminho mais curto entre dois vertices
-    mostrarCaminho(grafo);
-    cout << endl;
+    
 
-    return 0;
+    return 1; // A saida correta seria dentro do switch
 }

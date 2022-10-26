@@ -1,5 +1,10 @@
 origem,destino,peso
-0,1,2
-1,2,1
-2,3,3
-0,2,1
+A,B,2
+B,C,1
+C,D,3
+A,C,1
+F,A,1
+F,B,1
+F,C,1
+F,D,3
+F,E,5
