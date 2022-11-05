@@ -92,11 +92,19 @@ vector<int> Grafo::dijkstra(int origem, int destino) {
                 {
                     // atualiza a distância de "v" e insere na fila
                     distancias[v] = distancias[u] + custo_aresta;
-                    caminho[v].insert(caminho[v].begin(), caminho[u].begin(), caminho[u].end());
+                    caminho[v].push_back(u);
                     pq.push(make_pair(distancias[v], v));
                 }
             }
         }
+    }
+
+    int i = caminho[destino].back();
+    caminho[destino]={i, destino};
+    // calcula o caminho mínimo de origem para destino
+    while (i != origem){
+        i = caminho[i].back();
+        caminho[destino].insert(caminho[destino].begin(), i);
     }
 
     caminho[destino].push_back(distancias[destino]);
