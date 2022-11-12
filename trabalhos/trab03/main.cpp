@@ -41,11 +41,9 @@ int main() {
 
     c += fs;
 
-    c.fodase();
     cout << c;
 
     c -=  f;
-    c.fodase();
     cout << c;
     return 0;
 }

@@ -24,7 +24,6 @@ class Catalogo {
         friend Catalogo &operator+=(Catalogo &c, filme &f);
         friend Catalogo &operator+=(Catalogo &c, vector<filme> &f);
         friend Catalogo &operator-=(Catalogo &c, filme &f);
-        void fodase();
     private:
         unsigned int const qtdFilmes = MAX;
         vector<filme> filmes;

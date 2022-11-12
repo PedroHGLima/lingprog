@@ -60,7 +60,3 @@ Catalogo& operator-=(Catalogo &c, filme &f) {
     }
     return c; // aqui o filme não foi encontrado
 }
-
-void Catalogo::fodase() {
-    cout << filmes.size() << endl;
-}
