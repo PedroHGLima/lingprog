@@ -1,0 +1,5 @@
+banana, fruta
+papagaio, animal
+carro, veiculo
+linguagens, disciplina
+niteroi, cidade

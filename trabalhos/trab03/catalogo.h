@@ -12,17 +12,20 @@ struct filme {
     string nome;
     string produtora;
     double nota;
+
+    friend ostream &operator<<(ostream &os, const filme &f);
+    friend istream &operator>>(istream &is, filme &f);
 };
 
 class Catalogo {
     public:
-    /*
-        ostream &operator<<(ostream &os, const Catalogo &c);
-        ostream &operator<<(ostream &os, const filme &f);
-        istream &operator>>(istream &is, const filme &f);
-        Catalogo &operator+=(const filme &f);
-        */
+        friend ostream &operator<<(ostream &os, const filme &f);
+        friend ostream &operator<<(ostream &os, const Catalogo &c);
+        friend Catalogo &operator+=(Catalogo &c, filme &f);
+        friend Catalogo &operator+=(Catalogo &c, vector<filme> &f);
+        friend Catalogo &operator-=(Catalogo &c, filme &f);
+        void fodase();
     private:
-        int const qtdFilmes = MAX;
+        unsigned int const qtdFilmes = MAX;
         vector<filme> filmes;
 };
