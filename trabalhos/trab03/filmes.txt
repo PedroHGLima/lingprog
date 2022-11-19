@@ -1,24 +1,28 @@
-O Poderoso Chefão
-Paramount Pictures
-9.2
-Clube da Luta
-20th Century Fox
-8.8
-O Senhor dos Anéis: A Sociedade do Anel
-New Line Cinema
-8.8
-O Senhor dos Anéis: As Duas Torres
-New Line Cinema
-8.7
-O Senhor dos Anéis: O Retorno do Rei
-New Line Cinema
-8.9
-Pulp Fiction
-Miramax
-8.9
-Coringa
-Warner Bros.
-8.5
-Pulp Fiction
-Miramax
-8.9
+---------------------0---------------------
+Nome: Clube da Luta
+Produtora: 20th Century Fox
+Nota: 8.8
+---------------------1---------------------
+Nome: Coringa
+Produtora: Warner Bros.
+Nota: 8.5
+---------------------2---------------------
+Nome: O Poderoso Chefão
+Produtora: Paramount Pictures
+Nota: 9.2
+---------------------3---------------------
+Nome: O Senhor dos Anéis: A Sociedade do Anel
+Produtora: New Line Cinema
+Nota: 8.8
+---------------------4---------------------
+Nome: O Senhor dos Anéis: As Duas Torres
+Produtora: New Line Cinema
+Nota: 8.7
+---------------------5---------------------
+Nome: O Senhor dos Anéis: O Retorno do Rei
+Produtora: New Line Cinema
+Nota: 8.9
+---------------------6---------------------
+Nome: Pulp Fiction
+Produtora: Miramax
+Nota: 8.9

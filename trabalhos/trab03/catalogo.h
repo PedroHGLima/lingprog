@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <iomanip>
 
 #define MAX 10
 
@@ -34,6 +35,7 @@ class Catalogo {
         int operator()(string nome, string att, string novo);
         int operator()(string nome, string att, float novo);
         int melhor_avaliado();
+        bool ta_vazio();
     private:
         unsigned int const qtdFilmes = MAX;
         vector<filme> filmes;

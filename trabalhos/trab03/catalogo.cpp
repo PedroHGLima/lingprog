@@ -20,11 +20,12 @@ istream &operator>>(istream &is, filme &f) {
     string nome, produtora, nota;
     float c_nota;
     getline(is, nome);
+    getline(is, nome);
     getline(is, produtora);
     getline(is, nota);
-    c_nota = stof(nota);
-    f.nome = nome;
-    f.produtora = produtora;
+    c_nota = stof(nota.substr(6, nota.size()));
+    f.nome = nome.substr(6);
+    f.produtora = produtora.substr(11);
     f.nota = c_nota;
     return is;
 }
@@ -169,4 +170,11 @@ int Catalogo::melhor_avaliado() {
         }
     }
     return indice;
+}
+
+bool Catalogo::ta_vazio() {
+    if (filmes.size() == 0)
+        return true;
+    else
+        return false;
 }

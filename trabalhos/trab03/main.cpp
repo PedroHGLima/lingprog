@@ -39,11 +39,6 @@ void criar_filmes(Catalogo &c){
     f.produtora = "Warner Bros.";
     f.nota = 8.5;
     c += f;
-    
-    f.nome = "Pulp Fiction";
-    f.produtora = "Miramax";
-    f.nota = 8.9;
-    c += f;
 }
 
 string pegar_nome(){
@@ -60,12 +55,20 @@ void ler_arquivo(Catalogo &c, string nome_arquivo){
     arq.open(nome_arquivo);
     if(arq.is_open()){
         while(!arq.eof()){
-            cout << "---------------------" << endl;
             filme f;
             arq >> f;
-            cout << f;
             c += f;
         }
+    }
+    arq.close();
+}
+
+void salvar_arquivo(Catalogo &c, string nome_arquivo){
+    ofstream arq;
+    cout << "Salvando catálogo em " << nome_arquivo << endl;
+    arq.open(nome_arquivo);
+    if(arq.is_open()){
+        arq << c;
     }
     arq.close();
 }
@@ -73,8 +76,7 @@ void ler_arquivo(Catalogo &c, string nome_arquivo){
 int main() {
     Catalogo c;
     int comando = 9;
-
-    //criar_filmes(c);
+    string nome_arquivo = "filmes.txt";
 
     while (comando != 0) {
         switch (comando) {
@@ -83,9 +85,9 @@ int main() {
                 break;
             case 2: {
                 string nome = pegar_nome();
-                cout << "+---------------------------------------+" << endl;
+                cout << "+" << setfill('-') << setw(50) << "+" << endl;
                 cout << c(c(nome));
-                cout << "+---------------------------------------+" << endl;
+                cout << "+" << setfill('-') << setw(50) << "+" << endl;
                 break;
             }
             case 3: {
@@ -119,7 +121,7 @@ int main() {
                 break;
             }
             case 6: {
-                int nova;
+                float nova;
                 bool ficar=true;
                 string nome=pegar_nome(), att, novo;
                 while (c(nome)==-1) {
@@ -158,7 +160,18 @@ int main() {
                 cout << "O melhor filme é: " << c(c.melhor_avaliado());
                 break;
             case 8:
-                ler_arquivo(c, "filmes.txt");
+                cout << "Digite f, p ou nome do arquivo: "; cin >> nome_arquivo;
+                if (nome_arquivo == "f") {
+                    nome_arquivo = "filmes.txt";
+                    criar_filmes(c);
+                }
+                else if (nome_arquivo == "p") {
+                    nome_arquivo = "filmes.txt";
+                    ler_arquivo(c, nome_arquivo);
+                }
+                else {
+                    ler_arquivo(c, nome_arquivo);
+                }
                 break;
             case 9:
                 // Impressão da ajuda
@@ -171,10 +184,13 @@ int main() {
                 cout << "7 - Encontrar o filme melhor avaliado" << endl;
                 cout << "8 - Carregar filmes salvos" << endl;
                 cout << "9 - Imprimir a ajuda" << endl;
-                cout << "0 - Sair" << endl;
+                cout << "10 - Sair" << endl;
                 break;
-            case 0:
+            case 10:
                 cout << "Saindo..." << endl;
+                if (c.ta_vazio()) cout << "Catálogo vazio" << endl;
+                else salvar_arquivo(c, nome_arquivo);
+                return 0;
                 break;
             default:
                 cout << "Comando inválido" << endl;
