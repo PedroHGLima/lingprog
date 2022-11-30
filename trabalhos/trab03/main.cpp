@@ -54,11 +54,7 @@ void ler_arquivo(Catalogo &c, string nome_arquivo){
     ifstream arq;
     arq.open(nome_arquivo);
     if(arq.is_open()){
-        while(!arq.eof()){
-            filme f;
-            arq >> f;
-            c += f;
-        }
+        arq>>c;
     }
     arq.close();
 }
@@ -78,7 +74,7 @@ int main() {
     int comando = 9;
     string nome_arquivo = "filmes.txt";
 
-    while (comando != 0) {
+    while (true) {
         switch (comando) {
             case 1:
                 cout << c;
@@ -184,9 +180,9 @@ int main() {
                 cout << "7 - Encontrar o filme melhor avaliado" << endl;
                 cout << "8 - Carregar filmes salvos" << endl;
                 cout << "9 - Imprimir a ajuda" << endl;
-                cout << "10 - Sair" << endl;
+                cout << "0 - Sair" << endl;
                 break;
-            case 10:
+            case 0:
                 cout << "Saindo..." << endl;
                 if (c.ta_vazio()) cout << "Catálogo vazio" << endl;
                 else salvar_arquivo(c, nome_arquivo);

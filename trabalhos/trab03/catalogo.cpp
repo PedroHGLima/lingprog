@@ -19,14 +19,33 @@ ostream &operator<<(ostream &os, const Catalogo &c) {
 istream &operator>>(istream &is, filme &f) {
     string nome, produtora, nota;
     float c_nota;
-    getline(is, nome);
+    cin.ignore();
+   // getline(is, nome);
     getline(is, nome);
     getline(is, produtora);
     getline(is, nota);
-    c_nota = stof(nota.substr(6, nota.size()));
-    f.nome = nome.substr(6);
-    f.produtora = produtora.substr(11);
+    c_nota = stof(nota);
+    f.nome = nome;
+    f.produtora = produtora;
     f.nota = c_nota;
+    return is;
+}
+
+istream &operator>>(istream &is, Catalogo &c) {
+    string nome, produtora, nota;
+    float c_nota;
+    filme f;
+    cin.ignore();
+    while (getline(is, nome)) {
+        getline(is, nome);
+        getline(is, produtora);
+        getline(is, nota);
+        c_nota = stof(nota.substr(6, nota.size()));
+        f.nome = nome.substr(6, nome.size());
+        f.produtora = produtora.substr(11, produtora.size());
+        f.nota = c_nota;
+        c += f;
+    }
     return is;
 }
 

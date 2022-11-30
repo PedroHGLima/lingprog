@@ -1,0 +1,40 @@
+---------------------0---------------------
+Nome: Amigo Urso
+Produtora: Disney
+Nota: 8.6
+---------------------1---------------------
+Nome: Clube da Luta
+Produtora: 20th Century Fox
+Nota: 8.8
+---------------------2---------------------
+Nome: Coringa
+Produtora: Warner Bros.
+Nota: 8.5
+---------------------3---------------------
+Nome: O Poderoso Chefão
+Produtora: Paramount Pictures
+Nota: 9.2
+---------------------4---------------------
+Nome: O Senhor dos Anéis: A Sociedade do Anel
+Produtora: New Line Cinema
+Nota: 8.8
+---------------------5---------------------
+Nome: O Senhor dos Anéis: As Duas Torres
+Produtora: New Line Cinema
+Nota: 8.7
+---------------------6---------------------
+Nome: O Senhor dos Anéis: O Retorno do Rei
+Produtora: New Line Cinema
+Nota: 8.9
+---------------------7---------------------
+Nome: Pulp Fiction
+Produtora: Miramax
+Nota: 8.9
+---------------------8---------------------
+Nome: Star Wars: The Empire Strikes Back
+Produtora: Lucasfilm
+Nota: 8.9
+---------------------9---------------------
+Nome: Star Wars: The Renvege of the Sith
+Produtora: Lucasfilm
+Nota: 8.8

@@ -26,6 +26,7 @@ struct filme {
 class Catalogo {
     friend ostream &operator<<(ostream &os, const filme &f);
     friend ostream &operator<<(ostream &os, const Catalogo &c);
+    friend istream &operator>>(istream &is, Catalogo &c);
     public:
         int operator+=(filme &f);
         int operator+=(vector<filme> &f);
