@@ -27,3 +27,8 @@ bool Paciente::operator>(Paciente p) {
 bool Paciente::operator==(Paciente p) {
     return nome == p.nome;
 }
+
+ostream& operator<<(ostream& os, const Paciente& p) {
+    os << p.nome;
+    return os;
+}

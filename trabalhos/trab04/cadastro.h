@@ -7,6 +7,7 @@ class Cadastro {
         Cadastro();
         void insere(Paciente *p);
         void insere(Paciente *p, Arvore<Paciente> *arv);
+        Cadastro operator+(Paciente *p);
         Paciente *busca(string nome);
         void imprime();
         void imprime(Arvore<Paciente> *arv);

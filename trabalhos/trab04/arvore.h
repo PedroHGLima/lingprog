@@ -11,7 +11,6 @@ class Arvore {
         Arvore();
         Arvore(T valor);
         ~Arvore();
-        Arvore operator+(T val);
         void inserir(T valor);
         T *operator[](T valor);
         T *busca (T valor);
@@ -42,13 +41,6 @@ Arvore<T>::~Arvore() {
     if (direita != NULL) {
         delete direita;
     }
-}
-
-template <class T>
-Arvore<T> Arvore<T>::operator+(T val) {
-    Arvore<T> a;
-    a.inserir(val);
-    return a;
 }
 
 template <class T>
@@ -94,11 +86,13 @@ T* Arvore<T>::busca(T valor) {
 
 template <class T>
 void Arvore<T>::imprime() {
+    cout << "imprime:" << endl;
     if (this->esquerda != NULL) {
         this->esquerda->imprime();
     }
     cout << this->valor << endl;
     if (this->direita != NULL) {
+        cout << "direita:" << endl;
         this->direita->imprime();
     }
 }

@@ -3,6 +3,7 @@
 #include "arvore.h"
 
 class Paciente {
+    friend ostream& operator<<(ostream& os, const Paciente& p);
     public:
         Paciente();
         Paciente(string nome);
