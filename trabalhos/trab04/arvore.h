@@ -11,7 +11,11 @@ class Arvore {
         Arvore();
         Arvore(T valor);
         ~Arvore();
-        Arvore operator+(T valor);
+        Arvore operator+(T val);
+        void inserir(T valor);
+        T *operator[](T valor);
+        T *busca (T valor);
+        void imprime();
         T valor;
         Arvore<T> *esquerda;
         Arvore<T> *direita;
@@ -41,19 +45,60 @@ Arvore<T>::~Arvore() {
 }
 
 template <class T>
-Arvore<T> Arvore<T>::operator+(T valor) {
+Arvore<T> Arvore<T>::operator+(T val) {
+    Arvore<T> a;
+    a.inserir(val);
+    return a;
+}
+
+template <class T>
+void Arvore<T>::inserir(T valor) {
     if (valor < this->valor) {
-        if (esquerda == NULL) {
-            esquerda = new Arvore<T>(valor);
+        if (this->esquerda == NULL) {
+            this->esquerda = new Arvore<T>(valor);
         } else {
-            *esquerda + valor;
+            this->esquerda->inserir(valor);
         }
     } else {
-        if (direita == NULL) {
-            direita = new Arvore<T>(valor);
+        if (this->direita == NULL) {
+            this->direita = new Arvore<T>(valor);
         } else {
-            *direita + valor;
+            this->direita->inserir(valor);
         }
     }
-    return *this;
+}
+
+template <class T>
+T* Arvore<T>::operator[](T valor) {
+    return busca(valor);
+}
+
+template <class T>
+T* Arvore<T>::busca(T valor) {
+    if (valor == this->valor) {
+        return &(this->valor);
+    } else if (valor < this->valor) {
+        if (this->esquerda == NULL) {
+            return NULL;
+        } else {
+            return this->esquerda->busca(valor);
+        }
+    } else {
+        if (this->direita == NULL) {
+            return NULL;
+        } else {
+            return this->direita->busca(valor);
+        }
+    }
+}
+
+template <class T>
+void Arvore<T>::imprime() {
+    if (this->esquerda != NULL) {
+        this->esquerda->imprime();
+    }
+    cout << this->valor << endl;
+    if (this->direita != NULL) {
+        this->direita->imprime();
+    }
 }

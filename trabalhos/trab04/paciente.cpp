@@ -15,3 +15,15 @@ string Paciente::getNome() {
 void Paciente::setNome(string nome) {
     this->nome = nome;
 }
+
+bool Paciente::operator<(Paciente p) {
+    return nome < p.nome;
+}
+
+bool Paciente::operator>(Paciente p) {
+    return nome > p.nome;
+}
+
+bool Paciente::operator==(Paciente p) {
+    return nome == p.nome;
+}

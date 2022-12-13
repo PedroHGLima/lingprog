@@ -5,28 +5,24 @@ Cadastro::Cadastro() {
     arvore = NULL;
 }
 
-void Cadastro::inserir(Paciente *p) {
-    inserir(p, arvore);
+void Cadastro::insere(Paciente *p) {
+    insere(p, arvore);
 }
 
-void Cadastro::inserir(Paciente *p, Arvore<Paciente> *arv) {
+void Cadastro::insere(Paciente *p, Arvore<Paciente> *arv) {
     if (arv == NULL) {
         arvore = new Arvore<Paciente>(*p);
     } else {
-        if (p->getNome() < arv->valor.getNome()) {
-            if (arv->esquerda == NULL) {
-                arv->esquerda = new Arvore<Paciente>(*p);
-            } else {
-                inserir(p, arv->esquerda);
-            }
-        } else {
-            if (arv->direita == NULL) {
-                arv->direita = new Arvore<Paciente>(*p);
-            } else {
-                inserir(p, arv->direita);
-            }
-        }
+        Arvore<Paciente> aux = (*arv) + (*p);
+        arv = &aux;
     }
+}
+
+Paciente* Cadastro::busca(string nome) {
+    Paciente *p = new Paciente(nome);
+    Paciente *ret = NULL;
+    ret = arvore->busca(*p);
+    return ret;
 }
 
 void Cadastro::imprime() {
