@@ -1,4 +1,11 @@
 #include "cadastro.h"
+#include <stdexcept>
+
+class PacienteNaoEncontradoException : public runtime_error {
+	public:
+		PacienteNaoEncontradoException (string n) : runtime_error("O paciente " + n + " nao foi encontrado"){}
+};
+
 
 void carregarPacientes(Cadastro &c) {
     c = c + new Paciente("Joao");
@@ -8,7 +15,6 @@ void carregarPacientes(Cadastro &c) {
     c = c + new Paciente("Jose");
     c = c + new Paciente("Paulo");
     c = c + new Paciente("Joana");
-    c.imprime();
 }
 
 void inserirPaciente(Cadastro &c) {
@@ -20,16 +26,16 @@ void inserirPaciente(Cadastro &c) {
 void buscarPaciente(Cadastro &c) {
     string nome;
     cout << "Digite o nome do paciente: "; cin >> nome;
-    Paciente *p = c.busca(nome);
+    Paciente *p = c[nome];
     if (p == NULL) {
-        throw "Paciente nao encontrado";
+        throw PacienteNaoEncontradoException(nome);
     } else {
         cout << "Paciente encontrado: " << *p << endl;
     }
 }
 
 void imprimirPaciente(Cadastro &c) {
-    c.imprime();
+    cout << c;
 }
 
 void menu(Cadastro &c) {
@@ -43,8 +49,8 @@ void menu(Cadastro &c) {
             try{
                 buscarPaciente(c);
             }
-            catch(const std::exception& e){
-                std::cerr << e.what() << '\n';
+            catch(PacienteNaoEncontradoException& e){
+                cout << e.what() << endl;
             }
             break;
         case 3:

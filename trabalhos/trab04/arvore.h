@@ -61,30 +61,6 @@ void Arvore<T>::inserir(T valor) {
 }
 
 template <class T>
-T* Arvore<T>::operator[](T valor) {
-    return busca(valor);
-}
-
-template <class T>
-T* Arvore<T>::busca(T valor) {
-    if (valor == this->valor) {
-        return &(this->valor);
-    } else if (valor < this->valor) {
-        if (this->esquerda == NULL) {
-            return NULL;
-        } else {
-            return this->esquerda->busca(valor);
-        }
-    } else {
-        if (this->direita == NULL) {
-            return NULL;
-        } else {
-            return this->direita->busca(valor);
-        }
-    }
-}
-
-template <class T>
 void Arvore<T>::imprime() {
     cout << "imprime:" << endl;
     if (this->esquerda != NULL) {
