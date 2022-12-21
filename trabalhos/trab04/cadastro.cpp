@@ -4,26 +4,26 @@ Cadastro::Cadastro() {
     arvore = NULL;
 }
 
-void Cadastro::insere(Paciente *p) {
+void Cadastro::insere(PacienteHospitalar *p) {
     insere(p, arvore);
 }
 
-void Cadastro::insere(Paciente *p, Arvore<Paciente*> *arv) {
+void Cadastro::insere(PacienteHospitalar *p, Arvore<PacienteHospitalar*> *arv) {
     /// @brief Insere um paciente na árvore
-    /// @param p Paciente a ser inserido
+    /// @param p PacienteHospitalar a ser inserido
     /// @param arv Árvore onde o paciente será inserido
     if (arvore == NULL) {
-        arvore = new Arvore<Paciente*> (p);
+        arvore = new Arvore<PacienteHospitalar*> (p);
     } else {
         if (*p < *(arv->valor)) {
             if (arv->esquerda == NULL) {
-                arv->esquerda = new Arvore<Paciente*> (p);
+                arv->esquerda = new Arvore<PacienteHospitalar*> (p);
             } else {
                 insere(p, arv->esquerda);
             }
         } else if (*p > *(arv->valor)) {
             if (arv->direita == NULL) {
-                arv->direita = new Arvore<Paciente*> (p);
+                arv->direita = new Arvore<PacienteHospitalar*> (p);
             } else {
                 insere(p, arv->direita);
             }
@@ -33,24 +33,24 @@ void Cadastro::insere(Paciente *p, Arvore<Paciente*> *arv) {
     }
 }
 
-Cadastro Cadastro::operator+(Paciente *p) {
+Cadastro Cadastro::operator+(PacienteHospitalar *p) {
     insere(p);
     return *this;
 }
 
-Paciente* Cadastro::busca(string nome) {
+PacienteHospitalar* Cadastro::busca(string nome) {
     return busca(nome, arvore);
 }
 
-Paciente* Cadastro::operator[](string nome) {
+PacienteHospitalar* Cadastro::operator[](string nome) {
     return busca(nome);
 }
 
-Paciente* Cadastro::busca(string nome, Arvore<Paciente*> *arv) {
+PacienteHospitalar* Cadastro::busca(string nome, Arvore<PacienteHospitalar*> *arv) {
     /// @brief Busca um paciente na árvore
     /// @param nome Nome do paciente a ser buscado
     /// @param arv Árvore onde o paciente será buscado
-    /// @return Paciente encontrado
+    /// @return PacienteHospitalar encontrado
     if (arv == NULL) {
         cout << "Nenhum paciente cadastrado" << endl;
         return NULL;
@@ -77,7 +77,7 @@ void Cadastro::imprime() {
     imprime(arvore);
 }
 
-void Cadastro::imprime(Arvore<Paciente*> *arvore) {
+void Cadastro::imprime(Arvore<PacienteHospitalar*> *arvore) {
     /// @brief Impressão da árvore em ordem infixa
     /// @param arvore arvore a ser impressa
     if (arvore == NULL) {

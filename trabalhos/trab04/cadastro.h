@@ -1,19 +1,19 @@
 #pragma once
 
-#include "paciente.h"
+#include "phospitalar.h"
 
 class Cadastro {
     friend ostream& operator<<(ostream& os, Cadastro& c);
     public:
         Cadastro();
-        void insere(Paciente *p);
-        void insere(Paciente *p, Arvore<Paciente*> *arv);
-        Cadastro operator+(Paciente *p);
-        Paciente *busca(string nome);
-        Paciente* busca(string nome, Arvore<Paciente*> *arv);
-        Paciente* operator[](string nome);
+        void insere(PacienteHospitalar *p);
+        void insere(PacienteHospitalar *p, Arvore<PacienteHospitalar*> *arv);
+        Cadastro operator+(PacienteHospitalar *p);
+        PacienteHospitalar *busca(string nome);
+        PacienteHospitalar* busca(string nome, Arvore<PacienteHospitalar*> *arv);
+        PacienteHospitalar* operator[](string nome);
         void imprime();
-        void imprime(Arvore<Paciente*> *arv);
+        void imprime(Arvore<PacienteHospitalar*> *arv);
     private:
-        Arvore<Paciente*> *arvore;
+        Arvore<PacienteHospitalar*> *arvore;
 };

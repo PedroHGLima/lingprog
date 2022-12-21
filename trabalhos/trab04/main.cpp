@@ -1,4 +1,5 @@
 #include "cadastro.h"
+#include "phospitalar.h"
 #include <stdexcept>
 
 class PacienteNaoEncontradoException : public runtime_error {
@@ -8,19 +9,22 @@ class PacienteNaoEncontradoException : public runtime_error {
 
 
 void carregarPacientes(Cadastro &c) {
-    c = c + new Paciente("Joao");
-    c = c + new Paciente("Maria");
-    c = c + new Paciente("Ana");
-    c = c + new Paciente("Pedro");
-    c = c + new Paciente("Jose");
-    c = c + new Paciente("Paulo");
-    c = c + new Paciente("Joana");
+    c = c + new PacienteHospitalar("Joao");
+    c = c + new PacienteHospitalar("Maria");
+    c = c + new PacienteHospitalar("Ana");
+    c = c + new PacienteHospitalar("Pedro");
+    c = c + new PacienteHospitalar("Jose");
+    c = c + new PacienteHospitalar("Paulo");
+    c = c + new PacienteHospitalar("Joana");
 }
 
 void inserirPaciente(Cadastro &c) {
-    string nome;
+    string nome, sintoma;
     cout << "Digite o nome do paciente: "; cin >> nome;
-    c = c + new Paciente(nome);
+    cout << "Digite o sintoma: ";
+    cin.ignore();
+    getline(cin, sintoma);
+    c = c + new PacienteHospitalar(nome, sintoma);
 }
 
 void buscarPaciente(Cadastro &c) {
@@ -36,6 +40,21 @@ void buscarPaciente(Cadastro &c) {
 
 void imprimirPaciente(Cadastro &c) {
     cout << c;
+}
+
+void inserirSintoma(Cadastro &c) {
+    string nome;
+    cout << "Digite o nome do paciente: "; cin >> nome;
+    PacienteHospitalar *p = c[nome];
+    if (p == NULL) {
+        throw PacienteNaoEncontradoException(nome);
+    } else {
+        string sintoma;
+        cout << "Digite o sintoma: ";
+        cin.ignore();
+        getline(cin, sintoma);
+        p->setSintomas(sintoma);
+    }
 }
 
 void menu(Cadastro &c) {
@@ -56,6 +75,9 @@ void menu(Cadastro &c) {
         case 3:
             imprimirPaciente(c);
             break;
+        case 4:
+            inserirSintoma(c);
+            break;
         case 8:
             carregarPacientes(c);
             break;
@@ -63,6 +85,7 @@ void menu(Cadastro &c) {
             cout << "1 - Inserir paciente" << endl;
             cout << "2 - Buscar paciente" << endl;
             cout << "3 - Imprimir cadastro" << endl;
+            cout << "4 - Inserir sintoma" << endl;
             cout << "8 - Carregar pacientes" << endl;
             cout << "9 - Imprimir menu" << endl;
             cout << "0 - Sair" << endl;
