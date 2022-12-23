@@ -10,8 +10,11 @@ class Arvore {
     public:
         Arvore();
         Arvore(T valor);
+        Arvore(const Arvore<T> &arv);
         ~Arvore();
         void inserir(T valor);
+        Arvore<T> operator+(T valor);
+        Arvore<T> operator=(Arvore<T> arv);
         T *operator[](T valor);
         T *busca (T valor);
         void imprime();
@@ -44,20 +47,63 @@ Arvore<T>::~Arvore() {
 }
 
 template <class T>
-void Arvore<T>::inserir(T valor) {
-    if (valor < this->valor) {
-        if (this->esquerda == NULL) {
-            this->esquerda = new Arvore<T>(valor);
-        } else {
-            this->esquerda->inserir(valor);
-        }
+Arvore<T>::Arvore(const Arvore<T> &arv) {
+    this->valor = arv.valor;
+    if (arv.esquerda != NULL) {
+        this->esquerda = new Arvore<T>(*(arv.esquerda));
     } else {
-        if (this->direita == NULL) {
-            this->direita = new Arvore<T>(valor);
+        this->esquerda = NULL;
+    }
+    if (arv.direita != NULL) {
+        this->direita = new Arvore<T>(*(arv.direita));
+    } else {
+        this->direita = NULL;
+    }
+}
+
+template <class T>
+void Arvore<T>::inserir(T valor) {
+    if (valor == this->valor) {
+        cout << "Valor já existe na árvore" << endl;
+        return;
+    } else {
+        if (valor < this->valor) {
+            if (this->esquerda == NULL) {
+                this->esquerda = new Arvore<T>(valor);
+            } else {
+                this->esquerda->inserir(valor);
+            }
         } else {
-            this->direita->inserir(valor);
+            if (this->direita == NULL) {
+                this->direita = new Arvore<T>(valor);
+            } else {
+                this->direita->inserir(valor);
+            }
         }
     }
+}
+
+template <class T>
+Arvore<T> Arvore<T>::operator+(T valor) {
+    Arvore<T> *arv = new Arvore<T>(*(this));
+    arv->inserir(valor);
+    return *arv;
+}
+
+template <class T>
+Arvore<T> Arvore<T>::operator=(Arvore<T> arv) {
+    this->valor = arv.valor;
+    if (arv.esquerda != NULL) {
+        this->esquerda = new Arvore<T>(*(arv.esquerda));
+    } else {
+        this->esquerda = NULL;
+    }
+    if (arv.direita != NULL) {
+        this->direita = new Arvore<T>(*(arv.direita));
+    } else {
+        this->direita = NULL;
+    }
+    return *this;
 }
 
 template <class T>

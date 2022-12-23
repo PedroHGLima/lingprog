@@ -2,7 +2,7 @@ CC=g++
 CFLAGS=-Wall -std=c++11
 
 PROGRAM=trab04
-OBJS=main.o cadastro.o arvore.o paciente.o phospitalar.o
+OBJS=main.o cadastro.o paciente.o phospitalar.o arvore.o
 
 all: $(PROGRAM)
 
